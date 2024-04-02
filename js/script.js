@@ -258,29 +258,36 @@ window.addEventListener("DOMContentLoaded", () => {
 			  display: block;
 				margin: 0 auto;
 			`;
-			form.insertAdjacentElement("afterend", statusMassage);
 
-			const request = new XMLHttpRequest();
-			request.open("POST", "server.php");
-			request.setRequestHeader("Content-type", "application/json");
+			form.insertAdjacentElement("afterend", statusMassage);
 
 			const formData = new FormData(form);
 			const object = {};
+
 			formData.forEach((item, key) => {
 				object[key] = item;
 			});
-			const jsonFormData = JSON.stringify(object);
-			request.send(jsonFormData);
 
-			request.addEventListener("load", () => {
-				if (request.status === 200) {
+			fetch("server.php", {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json",
+				},
+				body: JSON.stringify(object),
+			})
+				.then(data => data.text())
+				.then(data => {
+					console.log(data);
 					showThunksModal(massage.access);
 					form.reset();
 					statusMassage.remove();
-				} else {
+				})
+				.catch(() => {
 					showThunksModal(massage.failure);
-				}
-			});
+				})
+				.finally(() => {
+					form.reset();
+				});
 		});
 	}
 
