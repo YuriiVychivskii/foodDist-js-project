@@ -2,6 +2,7 @@
 
 window.addEventListener("DOMContentLoaded", () => {
 	//Tabs
+	console.log("hello");
 
 	const tabsParent = document.querySelector(".tabheader"),
 		tabs = document.querySelectorAll(".tabheader__item"),
@@ -315,4 +316,8 @@ window.addEventListener("DOMContentLoaded", () => {
 			closeModalWindow();
 		}, 4000);
 	}
+
+	fetch("db.json")
+		.then(data => data.json())
+		.then(res => console.log(res));
 });
