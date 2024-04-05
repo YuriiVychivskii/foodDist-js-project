@@ -1,34 +1,75 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Игнорировать файлы, которые содержат конфиденциальные данные
+.secret
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-/js-yaml
-/is-path-inside
-/isexe
-/json-buffer
-/json-schema-traverse
+# Игнорировать временные файлы и каталоги
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
 
-# testing
-/coverage
+# Игнорировать файлы, созданные редакторами
+.vscode/
+.idea/
 
-# production
-/build
+# Игнорировать файлы компиляции и сборки
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+*.jar
 
-# misc
-.DS_Store
+# Игнорировать папки, содержащие зависимости и библиотеки
+/node_modules/
+/bower_components/
+/vendor/
+
+# Игнорировать файлы, содержащие настройки проекта
+*.env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
 
+# Игнорировать файлы и папки сборки
+/build/
+/dist/
+/out/
+
+# Игнорировать файлы и папки временных данных
+/tmp/
+/cache/
+
+# Игнорировать файлы и папки, созданные для отладки
+.DS_Store
+*.log.*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/*.iml
+/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-#My optimization
-.eslintrc.js
-/package-lock.json
-/package.json
-.idea/
+# Игнорировать файлы и папки, созданные для тестирования
+/coverage/
+/.nyc_output/
+
+# Игнорировать локальные файлы настроек редакторов
+/.vscode/
+/.idea/
+
+# Игнорировать файлы локализации
+/.yarn/*
+.pnp.*
+yarn.lock
+
+# Игнорировать файлы и папки, созданные докером
+/.dockerignore
+.DS_Store
+.dockerenv
+.dockerignore
+.git
+.gitignore
+README.md
