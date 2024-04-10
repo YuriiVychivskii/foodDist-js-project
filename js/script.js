@@ -326,39 +326,65 @@ window.addEventListener("DOMContentLoaded", () => {
 		prev = document.querySelector(".offer__slider-prev"),
 		next = document.querySelector(".offer__slider-next"),
 		total = document.querySelector("#total"),
-		current = document.querySelector("#current");
+		current = document.querySelector("#current"),
+		sliderWrapper = document.querySelector(".offer__slider-wrapper"),
+		slidesField = document.querySelector(".offer__slider-inner"),
+		width = window.getComputedStyle(sliderWrapper).width;
 
-	total.textContent = addSlideZero(slides.length);
+	slidesField.style.width = 100 * slides.length + "%";
+	slidesField.style.display = "flex";
+	slidesField.style.transition = "0.5s all";
 
+	sliderWrapper.style.overflow = "hidden";
+
+	slides.forEach(slide => (slide.style.width = width));
+
+	let offset = 0;
 	let slideIndex = 1;
 
-	function addSlideZero(num) {
-		if (num < 10) {
-			return `0${num}`;
+	if (slides.length < 10) {
+		total.textContent = `0${slides.length}`;
+		current.textContent = `0${slideIndex}`;
+	} else {
+		total.textContent = slides.length;
+		current.textContent = slideIndex;
+	}
+
+	function nextSlide() {
+		if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+			offset = 0;
 		} else {
-			return num;
+			offset += +width.slice(0, width.length - 2);
 		}
+		slidesField.style.transform = `translateX(-${offset}px)`;
+
+		slideIndex == slides.length ? (slideIndex = 1) : slideIndex++;
+		slideIndex < 10
+			? (current.textContent = `0${slideIndex}`)
+			: (current.textContent = slideIndex);
 	}
 
-	showSlides(slideIndex);
+	const sliderTimer = setInterval(nextSlide, 5000);
 
-	function showSlides(s) {
-		s < 1 ? (slideIndex = slides.length) : (s = s);
-		s > slides.length ? (slideIndex = 1) : (s = s);
-
-		slides.forEach(slide => (slide.style.display = "none"));
-		slides[slideIndex - 1].style.display = "block";
-		current.textContent = addSlideZero(slideIndex);
-	}
-
-	function plusSlide(n) {
-		showSlides((slideIndex += n));
-	}
+	next.addEventListener("click", () => {
+		nextSlide();
+		clearInterval(sliderTimer);
+	});
 
 	prev.addEventListener("click", () => {
-		plusSlide(-1);
-	});
-	next.addEventListener("click", () => {
-		plusSlide(1);
+		if (offset == 0) {
+			offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+		} else {
+			offset -= +width.slice(0, width.length - 2);
+		}
+		slidesField.style.transform = `translateX(-${offset}px)`;
+
+		slideIndex == 1 ? (slideIndex = slides.length) : slideIndex--;
+
+		slideIndex < 10
+			? (current.textContent = `0${slideIndex}`)
+			: (current.textContent = slideIndex);
+
+		clearInterval(sliderTimer);
 	});
 });
