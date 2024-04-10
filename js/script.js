@@ -360,51 +360,33 @@ window.addEventListener("DOMContentLoaded", () => {
 		indicators.append(dot);
 	}
 
-	dots.forEach((dot, i) => {
-		dot.addEventListener("click", () => {
-			offset = +width.slice(0, slides.length - 1) * i;
+	dots.forEach(dot => {
+		dot.addEventListener("click", e => {
+			const slideTo = e.target.getAttribute("data-type-to");
+			offset = +width.slice(0, slides.length - 1) * (slideTo - 1);
 			slidesField.style.transform = `translateX(-${offset}px)`;
-			current.textContent = i + 1;
+			current.textContent = addZero(slideTo);
 
-			i < 10
-				? (current.textContent = `0${i + 1}`)
-				: (current.textContent = i + 1);
-
-			dots.forEach(dot => (dot.style.opacity = 0.5));
-			dots[i].style.opacity = "1";
+			dots.forEach(dot => (dot.style.opacity = ".5"));
+			dots[slideTo - 1].style.opacity = "1";
 		});
 	});
 
-	if (slides.length < 10) {
-		total.textContent = `0${slides.length}`;
-		current.textContent = `0${slideIndex}`;
-	} else {
-		total.textContent = slides.length;
-		current.textContent = slideIndex;
-	}
+	total.textContent = addZero(slides.length);
+	current.textContent = addZero(slideIndex);
 
-	function nextSlide() {
+	next.addEventListener("click", () => {
 		if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
 			offset = 0;
 		} else {
 			offset += +width.slice(0, width.length - 2);
 		}
 		slidesField.style.transform = `translateX(-${offset}px)`;
-
 		slideIndex == slides.length ? (slideIndex = 1) : slideIndex++;
-		slideIndex < 10
-			? (current.textContent = `0${slideIndex}`)
-			: (current.textContent = slideIndex);
+		current.textContent = addZero(slideIndex);
 
 		dots.forEach(dot => (dot.style.opacity = 0.5));
 		dots[slideIndex - 1].style.opacity = "1";
-	}
-
-	// const sliderTimer = setInterval(nextSlide, 5000);
-
-	next.addEventListener("click", () => {
-		nextSlide();
-		// clearInterval(sliderTimer);
 	});
 
 	prev.addEventListener("click", () => {
@@ -414,16 +396,10 @@ window.addEventListener("DOMContentLoaded", () => {
 			offset -= +width.slice(0, width.length - 2);
 		}
 		slidesField.style.transform = `translateX(-${offset}px)`;
-
 		slideIndex == 1 ? (slideIndex = slides.length) : slideIndex--;
-
-		slideIndex < 10
-			? (current.textContent = `0${slideIndex}`)
-			: (current.textContent = slideIndex);
+		current.textContent = addZero(slideIndex);
 
 		dots.forEach(dot => (dot.style.opacity = 0.5));
 		dots[slideIndex - 1].style.opacity = "1";
-
-		// clearInterval(sliderTimer);
 	});
 });
