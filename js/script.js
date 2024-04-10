@@ -323,13 +323,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	// Offer slider
 	const slides = document.querySelectorAll(".offer__slide"),
+		slider = document.querySelector(".offer__slider"),
 		prev = document.querySelector(".offer__slider-prev"),
 		next = document.querySelector(".offer__slider-next"),
 		total = document.querySelector("#total"),
 		current = document.querySelector("#current"),
 		sliderWrapper = document.querySelector(".offer__slider-wrapper"),
 		slidesField = document.querySelector(".offer__slider-inner"),
-		width = window.getComputedStyle(sliderWrapper).width;
+		width = window.getComputedStyle(sliderWrapper).width,
+		dots = [];
+
+	let offset = 0;
+	let slideIndex = 1;
 
 	slidesField.style.width = 100 * slides.length + "%";
 	slidesField.style.display = "flex";
@@ -339,8 +344,36 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	slides.forEach(slide => (slide.style.width = width));
 
-	let offset = 0;
-	let slideIndex = 1;
+	slider.style.position = "relative";
+	const indicators = document.createElement("ol");
+	indicators.classList.add("carousel-indicators");
+	slider.append(indicators);
+
+	for (let i = 0; i < slides.length; i++) {
+		const dot = document.createElement("li");
+		dot.setAttribute("data-type-to", i + 1);
+		dot.classList.add("dot");
+		if (i === 0) {
+			dot.style.opacity = 1;
+		}
+		dots.push(dot);
+		indicators.append(dot);
+	}
+
+	dots.forEach((dot, i) => {
+		dot.addEventListener("click", () => {
+			offset = +width.slice(0, slides.length - 1) * i;
+			slidesField.style.transform = `translateX(-${offset}px)`;
+			current.textContent = i + 1;
+
+			i < 10
+				? (current.textContent = `0${i + 1}`)
+				: (current.textContent = i + 1);
+
+			dots.forEach(dot => (dot.style.opacity = 0.5));
+			dots[i].style.opacity = "1";
+		});
+	});
 
 	if (slides.length < 10) {
 		total.textContent = `0${slides.length}`;
@@ -362,13 +395,16 @@ window.addEventListener("DOMContentLoaded", () => {
 		slideIndex < 10
 			? (current.textContent = `0${slideIndex}`)
 			: (current.textContent = slideIndex);
+
+		dots.forEach(dot => (dot.style.opacity = 0.5));
+		dots[slideIndex - 1].style.opacity = "1";
 	}
 
-	const sliderTimer = setInterval(nextSlide, 5000);
+	// const sliderTimer = setInterval(nextSlide, 5000);
 
 	next.addEventListener("click", () => {
 		nextSlide();
-		clearInterval(sliderTimer);
+		// clearInterval(sliderTimer);
 	});
 
 	prev.addEventListener("click", () => {
@@ -385,6 +421,9 @@ window.addEventListener("DOMContentLoaded", () => {
 			? (current.textContent = `0${slideIndex}`)
 			: (current.textContent = slideIndex);
 
-		clearInterval(sliderTimer);
+		dots.forEach(dot => (dot.style.opacity = 0.5));
+		dots[slideIndex - 1].style.opacity = "1";
+
+		// clearInterval(sliderTimer);
 	});
 });
