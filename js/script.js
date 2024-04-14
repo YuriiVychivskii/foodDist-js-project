@@ -443,14 +443,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	function getStaticInformapion(parentSelector, activeClass) {
 		const elements = document.querySelectorAll(`${parentSelector} div`);
-
 		document.querySelector(parentSelector).addEventListener("click", e => {
 			let target = e.target;
 
-			if (
-				!target.classList.contains(parentSelector.replace(/\./, "")) &&
-				target.id !== "gender"
-			) {
+			if (target.classList.contains("calculating__choose-item")) {
 				elements.forEach(element => element.classList.remove(activeClass));
 				target.classList.add(activeClass);
 				if (target.getAttribute("data-ratio")) {
