@@ -410,4 +410,83 @@ window.addEventListener("DOMContentLoaded", () => {
 
 		dotOpacity(slideIndex);
 	});
+
+	// Fields calculator
+	// Blocs
+	const totalC = document.querySelector(".calculating__result span");
+
+	let sex = "female",
+		height,
+		weight,
+		age,
+		ratio = 1.375;
+
+	calcTotal();
+
+	function calcTotal() {
+		if (!sex || !height || !weight || !age || !ratio) {
+			totalC.textContent = " _________ ";
+			return;
+		} else {
+			if (sex === "male") {
+				totalC.textContent = Math.round(
+					(88.36 + 13.4 * weight + 3.1 * height - 4.3 * age) * ratio
+				);
+				return;
+			} else {
+				totalC.textContent = Math.round(
+					(447.6 + 9.2 * weight + 4.8 * height - 5.7 * age) * ratio
+				);
+			}
+		}
+	}
+
+	function getStaticInformapion(parentSelector, activeClass) {
+		const elements = document.querySelectorAll(`${parentSelector} div`);
+
+		document.querySelector(parentSelector).addEventListener("click", e => {
+			let target = e.target;
+
+			if (
+				!target.classList.contains(parentSelector.replace(/\./, "")) &&
+				target.id !== "gender"
+			) {
+				elements.forEach(element => element.classList.remove(activeClass));
+				target.classList.add(activeClass);
+				if (target.getAttribute("data-ratio")) {
+					ratio = target.getAttribute("data-ratio");
+				} else {
+					sex = target.getAttribute("id");
+				}
+
+				calcTotal();
+			}
+		});
+	}
+
+	getStaticInformapion("#gender", "calculating__choose-item_active");
+	getStaticInformapion(
+		".calculating__choose_big",
+		"calculating__choose-item_active"
+	);
+
+	function getDynamicInformapion(selector) {
+		document.querySelector(selector).addEventListener("input", e => {
+			let target = e.target;
+			switch (target.getAttribute("id")) {
+				case "height":
+					height = +target.value;
+					break;
+				case "weight":
+					weight = +target.value;
+					break;
+				case "age":
+					age = +target.value;
+					break;
+			}
+
+			calcTotal();
+		});
+	}
+	getDynamicInformapion(".calculating__choose_medium");
 });
