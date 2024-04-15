@@ -412,14 +412,39 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 
 	// Fields calculator
-	// Blocs
 	const totalC = document.querySelector(".calculating__result span");
 
-	let sex = "female",
-		height,
-		weight,
-		age,
-		ratio = 1.375;
+	let sex, height, weight, age, ratio;
+
+	function initializeStaticLocalData(key, defValue) {
+		if (localStorage.getItem(key)) {
+			window[key] = localStorage.getItem(key);
+		} else {
+			localStorage.setItem(key, defValue);
+			window[key] = defValue;
+		}
+	}
+	initializeStaticLocalData("sex", "female");
+	initializeStaticLocalData("ratio", 1.375);
+
+	function initializeDynamicLocalData(selector, activeClass) {
+		const elements = document.querySelectorAll(selector);
+		elements.forEach(elem => {
+			elem.classList.remove(activeClass);
+
+			if (
+				elem.getAttribute("id") === localStorage.getItem("sex") ||
+				elem.getAttribute("data-ratio") === localStorage.getItem("ratio")
+			) {
+				elem.classList.add(activeClass);
+			}
+		});
+	}
+	initializeDynamicLocalData("#gender div", "calculating__choose-item_active");
+	initializeDynamicLocalData(
+		".calculating__choose_big div",
+		"calculating__choose-item_active"
+	);
 
 	calcTotal();
 
@@ -441,28 +466,29 @@ window.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
-	function getStaticInformapion(parentSelector, activeClass) {
-		const elements = document.querySelectorAll(`${parentSelector} div`);
-		document.querySelector(parentSelector).addEventListener("click", e => {
-			let target = e.target;
-
-			if (target.classList.contains("calculating__choose-item")) {
-				elements.forEach(element => element.classList.remove(activeClass));
-				target.classList.add(activeClass);
+	function getStaticInformapion(selector, activeClass) {
+		const elements = document.querySelectorAll(selector);
+		elements.forEach(elem => {
+			elem.addEventListener("click", e => {
+				let target = e.target;
 				if (target.getAttribute("data-ratio")) {
 					ratio = target.getAttribute("data-ratio");
+					localStorage.setItem("ratio", ratio);
 				} else {
 					sex = target.getAttribute("id");
+					localStorage.setItem("sex", sex);
 				}
+				elements.forEach(element => element.classList.remove(activeClass));
+				target.classList.add(activeClass);
 
 				calcTotal();
-			}
+			});
 		});
 	}
 
-	getStaticInformapion("#gender", "calculating__choose-item_active");
+	getStaticInformapion("#gender div", "calculating__choose-item_active");
 	getStaticInformapion(
-		".calculating__choose_big",
+		".calculating__choose_big div",
 		"calculating__choose-item_active"
 	);
 
