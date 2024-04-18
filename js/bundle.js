@@ -1,15 +1,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./js/modules/calculator.js":
-/*!**********************************!*\
-  !*** ./js/modules/calculator.js ***!
-  \**********************************/
+/***/ "./js/modules/calc.js":
+/*!****************************!*\
+  !*** ./js/modules/calc.js ***!
+  \****************************/
 /***/ ((module) => {
 
-// Fields calculator
-
-function calculator() {
+function calc() {
 	const totalC = document.querySelector(".calculating__result span");
 
 	let sex, height, weight, age, ratio;
@@ -111,7 +109,7 @@ function calculator() {
 	getDynamicInformapion(".calculating__choose_medium");
 }
 
-module.exports = calculator;
+module.exports = calc;
 
 
 /***/ }),
@@ -121,8 +119,6 @@ module.exports = calculator;
   !*** ./js/modules/cards.js ***!
   \*****************************/
 /***/ ((module) => {
-
-// Food Cards
 
 function cards() {
 	class FoodCard {
@@ -199,21 +195,6 @@ function cards() {
 			).render();
 		});
 	});
-
-	// axios
-
-	// axios.get("http://localhost:3000/menu").then(data => {
-	// 	data.data.forEach(({ img, altimg, title, descr, price }) => {
-	// 		new FoodCard(
-	// 			img,
-	// 			altimg,
-	// 			title,
-	// 			descr,
-	// 			price,
-	// 			".menu .container"
-	// 		).render();
-	// 	});
-	// });
 }
 
 module.exports = cards;
@@ -228,8 +209,6 @@ module.exports = cards;
 /***/ ((module) => {
 
 function forms() {
-	// Forms
-
 	const forms = document.querySelectorAll("form");
 
 	const massage = {
@@ -322,8 +301,6 @@ module.exports = forms;
   \*****************************/
 /***/ ((module) => {
 
-//Modal
-
 function modal() {
 	const modalBtn = document.querySelectorAll("[data-modal]"),
 		modal = document.querySelector(".modal");
@@ -384,8 +361,6 @@ module.exports = modal;
   !*** ./js/modules/slider.js ***!
   \******************************/
 /***/ ((module) => {
-
-// Offer slider
 
 function slides() {
 	const slides = document.querySelectorAll(".offer__slide"),
@@ -497,8 +472,6 @@ module.exports = slides;
   \****************************/
 /***/ ((module) => {
 
-//Tabs
-
 function tabs() {
 	const tabsParent = document.querySelector(".tabheader"),
 		tabs = document.querySelectorAll(".tabheader__item"),
@@ -549,7 +522,6 @@ module.exports = tabs;
 /***/ ((module) => {
 
 function timer() {
-	//Timer
 	const deadline = "2024-04-01";
 
 	function convertTime(endtime) {
@@ -656,7 +628,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		timer = __webpack_require__(/*! ./modules/timer */ "./js/modules/timer.js"),
 		forms = __webpack_require__(/*! ./modules/forms */ "./js/modules/forms.js"),
 		cards = __webpack_require__(/*! ./modules/cards */ "./js/modules/cards.js"),
-		calculator = __webpack_require__(/*! ./modules/calculator */ "./js/modules/calculator.js");
+		calc = __webpack_require__(/*! ./modules/calc */ "./js/modules/calc.js");
 
 	tabs();
 	modal();
@@ -664,7 +636,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	timer();
 	forms();
 	cards();
-	calculator();
+	calc();
 });
 
 })();

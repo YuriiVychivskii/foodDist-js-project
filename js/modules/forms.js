@@ -1,6 +1,4 @@
 function forms() {
-	// Forms
-
 	const forms = document.querySelectorAll("form");
 
 	const massage = {

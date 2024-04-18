@@ -1,5 +1,3 @@
-// Offer slider
-
 function slides() {
 	const slides = document.querySelectorAll(".offer__slide"),
 		slider = document.querySelector(".offer__slider"),

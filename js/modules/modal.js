@@ -1,5 +1,3 @@
-//Modal
-
 function modal() {
 	const modalBtn = document.querySelectorAll("[data-modal]"),
 		modal = document.querySelector(".modal");

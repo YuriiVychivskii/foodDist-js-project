@@ -1,5 +1,3 @@
-// Food Cards
-
 function cards() {
 	class FoodCard {
 		constructor(

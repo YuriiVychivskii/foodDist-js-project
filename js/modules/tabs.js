@@ -1,5 +1,3 @@
-//Tabs
-
 function tabs() {
 	const tabsParent = document.querySelector(".tabheader"),
 		tabs = document.querySelectorAll(".tabheader__item"),

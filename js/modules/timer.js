@@ -1,5 +1,4 @@
 function timer() {
-	//Timer
 	const deadline = "2024-04-01";
 
 	function convertTime(endtime) {
