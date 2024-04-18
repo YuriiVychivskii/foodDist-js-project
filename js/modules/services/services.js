@@ -9,4 +9,14 @@ const postData = async (url, json) => {
 	return await res.json();
 };
 
-export { postData };
+const getResource = async url => {
+	const res = await fetch(url);
+
+	if (!res.ok) {
+		throw new Error(`${res} - ${res.status}`);
+	}
+
+	return await res.json();
+};
+
+export { getResource, postData };
