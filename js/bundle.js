@@ -323,8 +323,8 @@ function showModalWindow(modalSelector, modalTimerId) {
 	}
 }
 
-function modal(modalSelector, modalTimerId) {
-	const modalBtn = document.querySelectorAll("[data-modal]"),
+function modal(btnDataAttribute, modalSelector, modalTimerId) {
+	const modalBtn = document.querySelectorAll(btnDataAttribute),
 		modal = document.querySelector(modalSelector);
 
 	modalBtn.forEach(btn => {
@@ -747,7 +747,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		".tabcontent",
 		"tabheader__item_active"
 	);
-	(0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])(".modal", modalTimerId);
+	(0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])("[data-modal]", ".modal", modalTimerId);
 	(0,_modules_slider__WEBPACK_IMPORTED_MODULE_4__["default"])({
 		slidesSelector: ".offer__slide",
 		sliderSelector: ".offer__slider",

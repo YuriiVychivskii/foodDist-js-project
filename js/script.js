@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		".tabcontent",
 		"tabheader__item_active"
 	);
-	modal(".modal", modalTimerId);
+	modal("[data-modal]", ".modal", modalTimerId);
 	slider({
 		slidesSelector: ".offer__slide",
 		sliderSelector: ".offer__slider",

@@ -14,8 +14,8 @@ function showModalWindow(modalSelector, modalTimerId) {
 	}
 }
 
-function modal(modalSelector, modalTimerId) {
-	const modalBtn = document.querySelectorAll("[data-modal]"),
+function modal(btnDataAttribute, modalSelector, modalTimerId) {
+	const modalBtn = document.querySelectorAll(btnDataAttribute),
 		modal = document.querySelector(modalSelector);
 
 	modalBtn.forEach(btn => {
