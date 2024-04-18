@@ -19,7 +19,16 @@ window.addEventListener("DOMContentLoaded", () => {
 		"tabheader__item_active"
 	);
 	modal(".modal", modalTimerId);
-	slider();
+	slider({
+		slidesSelector: ".offer__slide",
+		sliderSelector: ".offer__slider",
+		prevArrow: ".offer__slider-prev",
+		nextArrow: ".offer__slider-next",
+		totalId: "#total",
+		currentId: "#current",
+		sliderWrapperSelector: ".offer__slider-wrapper",
+		fieldSelector: ".offer__slider-inner",
+	});
 	timer(".timer", "2024-07-01");
 	forms("form", ".modal", modalTimerId);
 	cards();

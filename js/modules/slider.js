@@ -1,13 +1,22 @@
-function slider() {
-	const slides = document.querySelectorAll(".offer__slide"),
-		slider = document.querySelector(".offer__slider"),
-		prev = document.querySelector(".offer__slider-prev"),
-		next = document.querySelector(".offer__slider-next"),
-		total = document.querySelector("#total"),
-		current = document.querySelector("#current"),
-		sliderWrapper = document.querySelector(".offer__slider-wrapper"),
+function slider({
+	slidesSelector,
+	sliderSelector,
+	prevArrow,
+	nextArrow,
+	totalId,
+	currentId,
+	sliderWrapperSelector,
+	fieldSelector,
+}) {
+	const slides = document.querySelectorAll(slidesSelector),
+		slider = document.querySelector(sliderSelector),
+		prev = document.querySelector(prevArrow),
+		next = document.querySelector(nextArrow),
+		total = document.querySelector(totalId),
+		current = document.querySelector(currentId),
+		sliderWrapper = document.querySelector(sliderWrapperSelector),
 		width = window.getComputedStyle(sliderWrapper).width,
-		slidesField = document.querySelector(".offer__slider-inner"),
+		slidesField = document.querySelector(fieldSelector),
 		dots = [];
 
 	let offset = 0;
