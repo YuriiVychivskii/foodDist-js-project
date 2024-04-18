@@ -1,6 +1,4 @@
-function timer() {
-	const deadline = "2024-04-01";
-
+function timer(timerSelector, deadline) {
 	function convertTime(endtime) {
 		let days, hours, minutes, seconds;
 		const t = Date.parse(endtime) - Date.parse(new Date());
@@ -54,7 +52,7 @@ function timer() {
 			}
 		}
 	}
-	updateClock(".timer", deadline);
+	updateClock(timerSelector, deadline);
 }
 
 export default timer;

@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	tabs();
 	modal();
 	slider();
-	timer();
+	timer(".timer", "2024-07-01");
 	forms();
 	cards();
 	calc();
