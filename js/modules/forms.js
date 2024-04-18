@@ -1,7 +1,8 @@
+import { closeModalWindow, showModalWindow } from "./modal";
 import { postData } from "./services/services";
 
-function forms() {
-	const forms = document.querySelectorAll("form");
+function forms(formSelector, modalSelector, modalTimerId) {
+	const forms = document.querySelectorAll(formSelector);
 
 	const massage = {
 		loading: "icons/form/spinner.svg",
@@ -49,7 +50,7 @@ function forms() {
 		const prevModalDialog = document.querySelector(".modal__dialog");
 
 		prevModalDialog.classList.add("hide");
-		showModalWindow();
+		showModalWindow(modalSelector, modalTimerId);
 
 		const thunksModal = document.createElement("div");
 		thunksModal.classList.add("modal__dialog");
@@ -60,13 +61,13 @@ function forms() {
 		  </div>
 		`;
 
-		document.querySelector(".modal").append(thunksModal);
+		document.querySelector(modalSelector).append(thunksModal);
 
 		setTimeout(() => {
 			thunksModal.remove();
 			prevModalDialog.classList.add("show");
 			prevModalDialog.classList.remove("hide");
-			closeModalWindow();
+			closeModalWindow(modalSelector);
 		}, 4000);
 	}
 }
