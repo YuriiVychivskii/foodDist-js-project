@@ -12,7 +12,12 @@ window.addEventListener("DOMContentLoaded", () => {
 		50000
 	);
 
-	tabs();
+	tabs(
+		".tabheader",
+		".tabheader__item",
+		".tabcontent",
+		"tabheader__item_active"
+	);
 	modal(".modal", modalTimerId);
 	slider();
 	timer(".timer", "2024-07-01");
