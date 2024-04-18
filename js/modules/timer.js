@@ -57,4 +57,4 @@ function timer() {
 	updateClock(".timer", deadline);
 }
 
-module.exports = timer;
+export default timer;

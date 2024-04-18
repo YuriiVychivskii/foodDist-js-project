@@ -1,4 +1,4 @@
-function slides() {
+function slider() {
 	const slides = document.querySelectorAll(".offer__slide"),
 		slider = document.querySelector(".offer__slider"),
 		prev = document.querySelector(".offer__slider-prev"),
@@ -97,4 +97,4 @@ function slides() {
 	});
 }
 
-module.exports = slides;
+export default slider;

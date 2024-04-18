@@ -100,4 +100,4 @@ function calc() {
 	getDynamicInformapion(".calculating__choose_medium");
 }
 
-module.exports = calc;
+export default calc;
