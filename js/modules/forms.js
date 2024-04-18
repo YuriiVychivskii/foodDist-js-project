@@ -1,3 +1,5 @@
+import { postData } from "./services/services";
+
 function forms() {
 	const forms = document.querySelectorAll("form");
 
@@ -10,17 +12,6 @@ function forms() {
 	forms.forEach(form => {
 		bindPostData(form);
 	});
-
-	const postData = async (url, json) => {
-		const res = await fetch(url, {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json",
-			},
-			body: json,
-		});
-		return await res.json();
-	};
 
 	function bindPostData(form) {
 		form.addEventListener("submit", event => {
