@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	modal("[data-modal]", ".modal", modalTimerId);
 	slider({
 		slidesSelector: ".offer__slide",
-		sliderSelector: ".offer__slider",
+		containerSelector: ".offer__slider",
 		prevArrow: ".offer__slider-prev",
 		nextArrow: ".offer__slider-next",
 		totalId: "#total",

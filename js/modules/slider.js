@@ -1,6 +1,6 @@
 function slider({
 	slidesSelector,
-	sliderSelector,
+	containerSelector,
 	prevArrow,
 	nextArrow,
 	totalId,
@@ -9,7 +9,7 @@ function slider({
 	fieldSelector,
 }) {
 	const slides = document.querySelectorAll(slidesSelector),
-		slider = document.querySelector(sliderSelector),
+		slider = document.querySelector(containerSelector),
 		prev = document.querySelector(prevArrow),
 		next = document.querySelector(nextArrow),
 		total = document.querySelector(totalId),
